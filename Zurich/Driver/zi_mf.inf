@@ -1,0 +1,42 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %manufacturer%
+DriverVer   = 07/10/2015,6.0.6000.16385
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+CatalogFile = zi_mf.cat
+
+[Manufacturer]
+%manufacturer% = MFDevices,NTx86,NTamd64,NTia64
+
+[MFDevices.NTx86]
+%RndisDevice%  = RNDIS.NT.6.0, USB\VID_1E7B&PID_0004&MI_00
+
+[MFDevices.NTamd64]
+%RndisDevice%  = RNDIS.NT.6.0, USB\VID_1E7B&PID_0004&MI_00
+
+[MFDevices.NTia64]
+%RndisDevice%  = RNDIS.NT.6.0, USB\VID_1E7B&PID_0004&MI_00
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[RNDIS.NT.6.0]
+Characteristics    = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType            = 15
+include            = netrndis.inf
+needs              = usbrndis6.ndi
+AddReg             = Rndis_AddReg
+*IfType            = 6    ; IF_TYPE_ETHERNET_CSMACD.
+*MediaType         = 16   ; NdisMediumNative802_11
+*PhysicalMediaType = 14   ; NdisPhysicalMedium802_3
+
+[RNDIS.NT.6.0.Services]
+include     = netrndis.inf
+needs       = usbrndis6.ndi.Services
+
+[RNDIS_AddReg]
+
+[Strings]
+manufacturer   = "Zurich Instruments AG"
+RndisDevice    = "Zurich Instruments MF Instrument RNDIS interface"
